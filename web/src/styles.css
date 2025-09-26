@@ -1,0 +1,244 @@
+:root {
+  color-scheme: light;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #f4f7fb;
+  color: #1f2430;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'header header'
+    'sidebar main';
+  min-height: 100vh;
+}
+
+header {
+  grid-area: header;
+  background: linear-gradient(120deg, #6a65ff, #8f87ff);
+  color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 12px 24px rgba(68, 64, 255, 0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+header p {
+  margin: 0;
+  max-width: 720px;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-right: 1px solid #e3e8f5;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #5a6283;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.sidebar button {
+  border: none;
+  background: #6a65ff;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sidebar button.secondary {
+  background: #eef1ff;
+  color: #5156a2;
+}
+
+.sidebar button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(106, 101, 255, 0.2);
+}
+
+.main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  grid-template-areas:
+    'workspace stage'
+    'code stage';
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.workspace-card,
+.stage-card,
+.code-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 12px 24px rgba(15, 26, 53, 0.08);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.workspace-card {
+  grid-area: workspace;
+}
+
+.stage-card {
+  grid-area: stage;
+  position: relative;
+  gap: 0.75rem;
+}
+
+.stage-canvas {
+  flex: 1;
+  border-radius: 0.75rem;
+  background: radial-gradient(circle at 20% 20%, #fff, #f5f7ff);
+  border: 1px solid #e3e8f5;
+  position: relative;
+  height: 320px;
+}
+
+.stage-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #525d7d;
+}
+
+.code-card {
+  grid-area: code;
+}
+
+.code-card pre {
+  background: #101427;
+  color: #e3e8ff;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  overflow: auto;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  max-height: 280px;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.controls button {
+  flex: 1;
+  background: #ff9a62;
+}
+
+.controls button.secondary {
+  background: #e8ecff;
+  color: #4b5394;
+}
+
+.workspace-container {
+  width: 100%;
+  height: 480px;
+}
+
+@media (max-width: 1100px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'header'
+      'main';
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'workspace'
+      'code'
+      'stage';
+  }
+}
+
+.stage-speech {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 16px rgba(68, 64, 255, 0.15);
+  border: 1px solid #d3dcff;
+  color: #444b9a;
+  font-weight: 500;
+}
+
+.stage-character {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(140deg, #6a65ff, #9792ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: 0 12px 24px rgba(106, 101, 255, 0.35);
+  transition: transform 0.25s ease;
+}
+
+.stage-trail {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.stage-trail svg {
+  width: 100%;
+  height: 100%;
+}
